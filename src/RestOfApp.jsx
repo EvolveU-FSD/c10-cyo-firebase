@@ -1,10 +1,16 @@
 import React from "react";
-import { useFirebase } from "./FirebaseProvider";
+import { useAuth } from "./AuthProvider";
+import Login from "./Login";
 
 const RestOfApp = () => {
-  const fb = useFirebase();
-  const app = fb.app;
-  return <div>App: {JSON.stringify(app)}</div>;
+  const auth = useAuth();
+  const user = auth.user;
+  return (
+    <div className="App">
+      {user ? "you are logged in!" : "not logged in 😔"}
+      <Login />
+    </div>
+  );
 };
 
 export default RestOfApp;
