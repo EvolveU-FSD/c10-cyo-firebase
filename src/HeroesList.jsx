@@ -1,16 +1,16 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import React, { useState } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useFirebase } from "./FirebaseProvider";
 
 const HeroesList = () => {
   const fbContext = useFirebase();
+
   const db = fbContext.db;
   const [heroes, setHeroes] = useState([]);
-  const getHeroesData = async () => {
-    try {
-      let collectionRef = collection(db, "heroes");
-      let queryRef = query(collectionRef, orderBy("name"));
-      let querySnap = await getDocs(queryRef);
+  useEffect(() => {
+    let collectionRef = collection(db, "heroes");
+    let queryRef = query(collectionRef, orderBy("name"));
+    const unsubscribe = onSnapshot(queryRef, (querySnap) => {
       if (querySnap.empty) {
         console.log("No docs found");
       } else {
@@ -20,14 +20,11 @@ const HeroesList = () => {
         }));
         setHeroes(heroesData);
       }
-    } catch (ex) {
-      console.log("FIRESTORE FAILURE!", ex.message);
-    }
-  };
+    });
+    return unsubscribe;
+  }, []);
   return (
     <div>
-      <button onClick={() => getHeroesData()}>GET DATA</button>
-      <br />
       {heroes.map((hero) => {
         return (
           <ul key={hero.DOC_ID}>
