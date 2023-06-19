@@ -1,6 +1,7 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useFirebase } from "./FirebaseProvider";
+import UploadImage from "./UploadImage";
 
 const HeroesList = () => {
   const fbContext = useFirebase();
@@ -31,6 +32,14 @@ const HeroesList = () => {
             <li>name: {hero.name}</li>
             <li>vehicle: {hero.vehicle}</li>
             <li>docId: {hero.DOC_ID}</li>
+            <li>
+              image:{" "}
+              {hero.imageUrl ? (
+                <img src={hero.imageUrl} />
+              ) : (
+                <UploadImage docId={hero.DOC_ID} />
+              )}
+            </li>
             <hr />
           </ul>
         );
