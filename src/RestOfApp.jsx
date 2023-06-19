@@ -1,5 +1,7 @@
 import React from "react";
 import { useAuth } from "./AuthProvider";
+import HeroesList from "./HeroesList";
+import HeroForm from "./HeroForm";
 import Login from "./Login";
 
 const RestOfApp = () => {
@@ -9,6 +11,8 @@ const RestOfApp = () => {
     <div className="App">
       {user ? "you are logged in!" : "not logged in 😔"}
       <Login />
+      <HeroForm />
+      <HeroesList />
     </div>
   );
 };

@@ -13,8 +13,13 @@ const Login = () => {
   };
   return (
     <div>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} />
       <input
+        placeholder="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        placeholder="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
