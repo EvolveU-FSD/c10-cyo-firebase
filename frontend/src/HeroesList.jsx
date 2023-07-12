@@ -35,7 +35,7 @@ const HeroesList = () => {
             <li>
               image:{" "}
               {hero.imageUrl ? (
-                <img src={hero.imageUrl} />
+                <img src={hero.imageUrl} height="50" width="50" />
               ) : (
                 <UploadImage docId={hero.DOC_ID} />
               )}

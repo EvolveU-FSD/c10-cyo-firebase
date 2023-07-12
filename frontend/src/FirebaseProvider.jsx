@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getFunctions } from "firebase/functions";
+
 const FirebaseContext = createContext();
 export const useFirebase = () => useContext(FirebaseContext);
 
@@ -22,9 +24,10 @@ const FirebaseProvider = (props) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const cloudFuncs = getFunctions(app);
   const store = getStorage(app);
 
-  const theValues = { app, auth, db, store };
+  const theValues = { app, auth, db, store, cloudFuncs };
   return (
     <FirebaseContext.Provider value={theValues}>
       {children}

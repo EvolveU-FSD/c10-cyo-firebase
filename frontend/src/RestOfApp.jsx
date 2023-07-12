@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "./AuthProvider";
+import HeroesCount from "./HeroesCount";
 import HeroesList from "./HeroesList";
 import HeroForm from "./HeroForm";
 import Login from "./Login";
@@ -13,6 +14,7 @@ const RestOfApp = () => {
       <Login />
       <HeroForm />
       <HeroesList />
+      <HeroesCount />
     </div>
   );
 };
